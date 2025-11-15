@@ -14,7 +14,7 @@ score = 0
 fruits = ['melon', 'orange', 'pomegranate', 'guava', 'bomb']
 
 WIDTH, HEIGHT = 800, 500
-FPS = 30
+FPS = 15
 GAME_TIME = 30  # 30 segundos de juego
 
 pygame.init()
@@ -80,9 +80,9 @@ def generate_random_fruits(fruit):
         'img': pygame.image.load(fruit_path),
         'x' : random.randint(100,500),
         'y' : 800,
-        'speed_x': random.randint(-10,10),
+        'speed_x': random.randint(-5,5),
         'speed_y': random.randint(-80, -60),
-        'throw': random.random() >= 0.75,
+        'throw': random.random() >= 0.90,
         't': 0,
         'hit': False,
     }
@@ -292,7 +292,7 @@ while game_running:
                     half_fruit_path = "images/" + "half_" + key + ".png"
 
                 value['img'] = pygame.image.load(half_fruit_path)
-                value['speed_x'] += 10
+                value['speed_x'] += 5
                 if key != 'bomb':
                     score += 1
                 value['hit'] = True
