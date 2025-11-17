@@ -12,6 +12,13 @@ Cutting fruits con tu dedo índice y cámara web. Evita bombas, suma puntos y co
 
 </div>
 
+## 👥 Integrantes
+- [Edson Leonardo Felix Cuevas](https://github.com/EdsonCuevas)
+- [Alfredo Elizaldi Romero](https://github.com/elizaldi14)
+- [Gustavo Ceja Ayala](https://github.com/Gusceja12)
+- [Adrian Lopez Flores](https://github.com/FREENKILLA)
+- [Gabriel Valencia Barrios](https://github.com/Gaboard)
+
 ---
 
 ## 📑 Tabla de contenidos
@@ -49,6 +56,29 @@ Cutting fruits con tu dedo índice y cámara web. Evita bombas, suma puntos y co
 - Python 3.9–3.11.
 - Cámara web funcional.
 - Windows, macOS o Linux.
+
+## 📦 Dependencias de Python
+Estas son las librerías utilizadas por el proyecto:
+
+- `pygame` — motor de juego y audio.
+- `opencv-python` — captura de vídeo y procesamiento de imágenes.
+- `mediapipe` — detección de la mano y landmarks.
+
+Instalación recomendada:
+
+```bash
+pip install "pygame>=2.1" "opencv-python>=4.7" "mediapipe==0.10.*"
+```
+
+Comprobación rápida:
+
+```bash
+python -c "import pygame, cv2, mediapipe as mp; print('OK')"
+```
+
+Notas de compatibilidad:
+- `mediapipe` no soporta oficialmente Python 3.12; usa 3.9–3.11.
+- Si la instalación falla, asegúrate de tener `pip` actualizado: `python -m pip install --upgrade pip`.
 
 ## 🚀 Instalación
 1. Clona el repositorio.
@@ -116,14 +146,6 @@ python handtracking.py
 - Cambia la detección de mano ajustando:
   - `Hands(max_num_hands=1, min_detection_confidence=0.7)` en `handtracking.py:43`.
 - Modifica velocidad y físicas en `generate_random_fruits()` `handtracking.py:77–88`.
-
-## 🖼️ Capturas y demo
-- GIF de demo: `docs/demo/demo.gif`.
-- Pantalla de inicio: `docs/capturas/inicio.png`.
-- Juego en curso: `docs/capturas/juego.png`.
-- Fin de juego: `docs/capturas/game_over.png`.
-
-> Coloca tus imágenes en `docs/` (o la carpeta que prefieras) y actualiza las rutas si lo deseas.
 
 ## 🛠️ Troubleshooting
 - La cámara no inicia: cierra apps que la usen (Zoom, Teams, etc.).
