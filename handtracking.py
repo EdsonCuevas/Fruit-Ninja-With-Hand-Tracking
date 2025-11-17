@@ -15,12 +15,16 @@ fruits = ['melon', 'orange', 'pomegranate', 'guava', 'bomb']
 
 WIDTH, HEIGHT = 800, 500
 FPS = 15
-GAME_TIME = 30  # 30 segundos de juego
+GAME_TIME = 40  # 30 segundos de juego
 
 pygame.init()
 pygame.display.set_caption('Fruit-Ninja con manos')
 gameDisplay = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
+try:
+    pygame.mixer.init()
+except:
+    pass
 
 WHITE = (255,255,255)
 BLACK = (0,0,0)
@@ -30,6 +34,19 @@ font = pygame.font.Font(os.path.join(os.getcwd(), 'comic.ttf'), 42)
 small_font = pygame.font.Font(os.path.join(os.getcwd(), 'comic.ttf'), 20)
 score_text = font.render('Score : ' + str(score), True, WHITE)
 lives_icon = pygame.image.load('images/white_lives.png')
+music_available = False
+try:
+    music_path = None
+    if os.path.exists('music.mp3'):
+        music_path = 'music.mp3'
+    elif os.path.exists('music.mp3'):
+        music_path = 'music.mp3'
+    if music_path:
+        pygame.mixer.music.load(music_path)
+        pygame.mixer.music.set_volume(0.5)
+        music_available = True
+except:
+    pass
 
 # Variables de tiempo
 start_time = 0
@@ -197,6 +214,11 @@ while game_running:
         start_time = time.time()
         time_remaining = GAME_TIME
         paused = False
+        if music_available:
+            try:
+                pygame.mixer.music.play(-1)
+            except:
+                pass
         
         # Regenerar frutas
         for fruit in fruits:
@@ -211,6 +233,11 @@ while game_running:
                 paused = not paused
                 if paused:
                     pause_start = time.time()
+                    if music_available:
+                        try:
+                            pygame.mixer.music.pause()
+                        except:
+                            pass
             
             if event.key == pygame.K_r:
                 game_over = True
@@ -233,6 +260,11 @@ while game_running:
                         # Ajustar el tiempo para compensar la pausa
                         pause_duration = time.time() - pause_start
                         start_time += pause_duration
+                        if music_available:
+                            try:
+                                pygame.mixer.music.unpause()
+                            except:
+                                pass
                     if event.key == pygame.K_r:
                         game_over = True
                         waiting_unpause = False
@@ -317,4 +349,9 @@ while game_running:
     pygame.display.update()
     clock.tick(FPS)
 
+if music_available:
+    try:
+        pygame.mixer.music.stop()
+    except:
+        pass
 pygame.quit()
