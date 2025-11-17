@@ -45,9 +45,12 @@ mp_draw = mp.solutions.drawing_utils
 
 # Variable global para guardar la posición del dedo
 finger_pos = (WIDTH//2, HEIGHT//2)
+PREVIEW_W, PREVIEW_H = 240, 180
+preview_frame = None
 
 def hand_tracking():
     global finger_pos
+    global preview_frame
     cap = cv2.VideoCapture(0)
     while True:
         ret, frame = cap.read()
@@ -64,6 +67,9 @@ def hand_tracking():
                 x = int(hand_landmarks.landmark[8].x * WIDTH)
                 y = int(hand_landmarks.landmark[8].y * HEIGHT)
                 finger_pos = (x, y)
+                mp_draw.draw_landmarks(rgb, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+        preview = cv2.resize(rgb, (PREVIEW_W, PREVIEW_H))
+        preview_frame = preview
 
     cap.release()
     cv2.destroyAllWindows()
@@ -261,6 +267,15 @@ while game_running:
     # Posición del dedo
     current_position = finger_pos
     pygame.draw.circle(gameDisplay, (0,255,0), current_position, 10)
+
+    if preview_frame is not None:
+        px = WIDTH - PREVIEW_W - 10
+        py = HEIGHT - PREVIEW_H - 10
+        pygame.draw.rect(gameDisplay, YELLOW, (px-2, py-2, PREVIEW_W+4, PREVIEW_H+4), 2)
+        w = PREVIEW_W
+        h = PREVIEW_H
+        surf = pygame.image.frombuffer(preview_frame.tobytes(), (w, h), "RGB")
+        gameDisplay.blit(surf, (px, py))
 
     for key, value in data.items():
         if value['throw']:

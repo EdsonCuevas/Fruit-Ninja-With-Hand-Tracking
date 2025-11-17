@@ -69,6 +69,29 @@ Cutting fruits con tu dedo índice y cámara web. Evita bombas, suma puntos y co
    pip install pygame opencv-python mediapipe
    ```
 
+## 📚 Instalación de librerías de Python
+Con el entorno virtual activo, instala las librerías necesarias.
+
+- Instalación rápida (todas juntas):
+  ```bash
+  pip install pygame opencv-python mediapipe
+  ```
+
+- Instalación por librería:
+  ```bash
+  pip install pygame
+  pip install sys
+  pip install opencv-python
+  pip install mediapipe
+  ```
+
+- Verificar instalación:
+  ```bash
+  python -c "import pygame, cv2, mediapipe as mp; print('OK')"
+  ```
+
+Si encuentras errores con Mediapipe, asegúrate de usar Python 3.9–3.11 y tener actualizado `pip`.
+
 ## ▶️ Ejecución
 ```bash
 python handtracking.py
